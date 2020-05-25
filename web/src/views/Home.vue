@@ -1,18 +1,52 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <swiper :options="swiperOptions">
+      <swiper-slide>
+        <img class="w-100" src="../assets/img/swiper.jpeg" alt="" />
+      </swiper-slide>
+      <swiper-slide>
+        <img class="w-100" src="../assets/img/swiper.jpeg" alt="" />
+      </swiper-slide>
+      <swiper-slide>
+        <img class="w-100" src="../assets/img/swiper.jpeg" alt="" />
+      </swiper-slide>
+      <div
+        class="swiper-pagination pagination-home text-right px-3 pb-1 "
+        slot="pagination"
+      ></div>
+    </swiper>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      swiperOptions: {
+        pagination: {
+          el: ".pagination-home",
+        },
+        loop: true,
+        autoplay: {
+          delay: 1500,
+        },
+        // Some Swiper option/callback...
+      },
+    };
+  },
+};
+</script>
+
+<style lang="scss">
+.pagination-home {
+  left: -1em;
+  .swiper-pagination-bullet {
+    opacity: 1;
+    border-radius: 0.1538rem;
+    background: #fff;
+    &.swiper-pagination-bullet-active {
+      background: #4b67af;
+    }
   }
 }
-</script>
+</style>
