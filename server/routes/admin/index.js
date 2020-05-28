@@ -10,6 +10,7 @@ module.exports = app => {
   const auth = require('../../middleware/auth')
 
 
+
   router.post('/', async (req, res) => {
     const model = await req.Model.create(req.body)
     res.send(model)
@@ -30,7 +31,8 @@ module.exports = app => {
     if (req.Model.modelName === "Category") {
       queryOptions.populate = "parent"
     }
-    const items = await req.Model.find().setOptions(queryOptions).limit(10)
+
+    const items = await req.Model.find().setOptions(queryOptions).limit(100)
     res.send(items)
   })
   router.get('/:id', async (req, res) => {
@@ -38,11 +40,7 @@ module.exports = app => {
     res.send(model)
   })
 
-  app.use('/admin/api/rest/:resource', auth(), async (req, res, next) => {
-    const modelName = require('inflection').classify(req.params.resource)
-    req.Model = require(`../../models/${modelName}`)
-    next()
-  }, router)
+
 
 
   const multer = require('multer')
@@ -68,6 +66,13 @@ module.exports = app => {
     const token = jwt.sign({ id: user._id, }, app.get('secret'))
     res.send({ token })
   })
+
+  app.use('/admin/api/rest/:resource', async (req, res, next) => {
+    const modelName = require('inflection').classify(req.params.resource)
+    req.Model = require(`../../models/${modelName}`)
+    next()
+  }, router)
+
 
   //错误处理
   app.use(async (err, req, res, next) => {

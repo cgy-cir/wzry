@@ -23,13 +23,14 @@ $colors: (
   "primary": #db9e3f,
   "white": #fff,
   "light": #f9f9f9,
+  "light-1": #d4d9de,
   "grey": #999,
   "grey-1": #666,
   "dark-1": #343440,
   "dark": #222,
   "black": #000,
 );
-
+$border-color: map-get($colors, "light-1");
 //字体
 $base-font-size: 1rem;
 $font-sizes: (
@@ -40,6 +41,14 @@ $font-sizes: (
   lg: 1.0769,
   xl: 1.2308,
 );
+
+//边框
+.bd-r {
+  border-right: 1px solid $border-color;
+}
+.bd-b {
+  border-bottom: 1px solid $border-color;
+}
 
 //width,height
 .w-100 {
@@ -55,6 +64,12 @@ $font-sizes: (
 }
 .flex-column {
   flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-nowrap {
+  flex-wrap: nowrap;
 }
 
 $flex-jc: (
@@ -111,11 +126,54 @@ $spacing-sizes: (
 
 //nav
 .nav {
+  display: flex;
   .nav-item {
     border-bottom: 3px solid transparent;
     padding-bottom: 0.2rem;
+
     &.active {
-      border-bottom: 3px solid #fff;
+      padding-bottom: 0.2rem;
+      color: map-get($colors, "primary");
+      border-bottom: 3px solid map-get($colors, "primary");
     }
   }
+  &.nav-inverse {
+    .nav-item {
+      color: map-get($colors, "white");
+      .active {
+        padding-bottom: 0.2rem;
+        border-bottom: 3px solid map-get($colors, "white");
+      }
+    }
+  }
+}
+
+//sprite
+.sprite {
+  background: url(../img/index.png) no-repeat 0 0;
+  background-size: 28.8462rem;
+  display: inline-block;
+  &.sprite-news {
+    width: 1.7692rem;
+    height: 1.5385rem;
+    background-position: 63.546% 15.517%;
+  }
+  &.sprite-arrow-close {
+    width: 0.7692rem;
+    height: 0.7692rem;
+    background-position: 38.577% 52.076%;
+  }
+  &.sprite-arrow-open {
+    width: 0.7692rem;
+    height: 0.7692rem;
+    background-position: 38.577% 52.076%;
+    transform: rotate(180deg);
+  }
+}
+
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
