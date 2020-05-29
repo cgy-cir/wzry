@@ -3,9 +3,9 @@
     <div class="card-header bd-b d-flex pb-3 ai-center">
       <i class="iconfont" :class="`icon-${icon}`"></i>
       <div class="fx-xxl flex-1 px-2">
-        <span>{{title}}</span>
+        <span :class="{'font-weight':plain}">{{title}}</span>
       </div>
-      <i class="iconfont icon-menu"></i>
+      <i class="iconfont icon-menu" v-if="!plain"></i>
     </div>
     <div class="card-body pt-3">
       <slot></slot>
@@ -23,6 +23,9 @@ export default {
     icon: {
       type: String,
       required: true
+    },
+    plain: {
+      type: Boolean
     }
   },
   data() {
@@ -30,3 +33,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.font-weight {
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+</style>
+  

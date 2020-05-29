@@ -63,3 +63,10 @@
     }
   }
 }
+
+//border
+@each $dir in (top, left, bottom, right) {
+  .border-#{$dir} {
+    border-#{$dir}: 1px solid $border-color;
+  }
+}

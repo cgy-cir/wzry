@@ -15,9 +15,22 @@
               class="avatar-uploader"
               :action="$http.defaults.baseURL + '/upload'"
               :show-file-list="false"
-              :on-success="afterUpload"
+              :headers="getAuthHeaders()"
+              :on-success="(res) => $set(model, 'avatar', res.url)"
             >
               <img v-if="model.avatar" :src="model.avatar" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="背景">
+            <el-upload
+              class="avatar-uploader"
+              :action="$http.defaults.baseURL + '/upload'"
+              :show-file-list="false"
+              :headers="getAuthHeaders()"
+              :on-success="(res) => $set(model, 'banner', res.url)"
+            >
+              <img v-if="model.banner" :src="model.banner" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
@@ -32,55 +45,25 @@
             </el-select>
           </el-form-item>
           <el-form-item label="难度">
-            <el-rate
-              style="margin-top:11px"
-              :max="9"
-              show-score
-              v-model="model.scores.difficult"
-            ></el-rate>
+            <el-rate style="margin-top:11px" :max="9" show-score v-model="model.scores.difficult"></el-rate>
           </el-form-item>
           <el-form-item label="技能">
-            <el-rate
-              style="margin-top:11px"
-              :max="9"
-              show-score
-              v-model="model.scores.skills"
-            ></el-rate>
+            <el-rate style="margin-top:11px" :max="9" show-score v-model="model.scores.skills"></el-rate>
           </el-form-item>
           <el-form-item label="攻击">
-            <el-rate
-              style="margin-top:11px"
-              :max="9"
-              show-score
-              v-model="model.scores.attack"
-            ></el-rate>
+            <el-rate style="margin-top:11px" :max="9" show-score v-model="model.scores.attack"></el-rate>
           </el-form-item>
           <el-form-item label="生存">
-            <el-rate
-              style="margin-top:11px"
-              :max="9"
-              show-score
-              v-model="model.scores.survive"
-            ></el-rate>
+            <el-rate style="margin-top:11px" :max="9" show-score v-model="model.scores.survive"></el-rate>
           </el-form-item>
           <el-form-item label="顺风出装">
             <el-select v-model="model.item1" multiple>
-              <el-option
-                v-for="item of items"
-                :label="item.name"
-                :key="item._id"
-                :value="item._id"
-              ></el-option>
+              <el-option v-for="item of items" :label="item.name" :key="item._id" :value="item._id"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="逆风出装">
             <el-select v-model="model.item2" multiple>
-              <el-option
-                v-for="item of items"
-                :label="item.name"
-                :key="item._id"
-                :value="item._id"
-              ></el-option>
+              <el-option v-for="item of items" :label="item.name" :key="item._id" :value="item._id"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="使用技巧">
@@ -114,6 +97,12 @@
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </el-form-item>
+              <el-form-item label="冷却值">
+                <el-input v-model="item.cd"></el-input>
+              </el-form-item>
+              <el-form-item label="消耗">
+                <el-input v-model="item.cost"></el-input>
+              </el-form-item>
               <el-form-item label="描述">
                 <el-input type="textarea" v-model="item.description"></el-input>
               </el-form-item>
@@ -121,12 +110,32 @@
                 <el-input type="textarea" v-model="item.tips"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button
-                  size="small"
-                  type="danger"
-                  @click="model.skills.splice(index, 1)"
-                  >删除</el-button
-                >
+                <el-button size="small" type="danger" @click="model.skills.splice(index, 1)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
+        <el-tab-pane label="英雄关系" name="partners">
+          <el-button type="text" @click="model.partners.push({})">
+            <i class="el-icon-plus"></i>添加英雄
+          </el-button>
+          <el-row type="flex" style="flex-wrap:wrap">
+            <el-col :md="12" v-for="(item, index) in model.partners" :key="index">
+              <el-form-item label="英雄">
+                <el-select v-model="item.hero" filterable>
+                  <el-option
+                    v-for="hero in heroes"
+                    :key="hero._id"
+                    :value="hero._id"
+                    :label="hero.name"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input type="textarea" v-model="item.description"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button size="small" type="danger" @click="model.partners.splice(index, 1)">删除</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -143,27 +152,29 @@
 export default {
   props: {
     id: {
-      type: String,
-    },
+      type: String
+    }
   },
   data() {
     return {
       model: {
         name: "",
         avatar: "",
+        banner: "",
         scores: {
-          difficult: 0,
+          difficult: 0
         },
         skills: [],
+        partners: [],
+        item1: [],
+        item2: []
       },
       categories: [],
       items: [],
+      heroes: []
     };
   },
   methods: {
-    afterUpload(res) {
-      this.model.avatar = res.url;
-    },
     async save() {
       if (this.id) {
         await this.$http.put(`rest/heroes/${this.id}`, this.model);
@@ -173,7 +184,7 @@ export default {
       this.$router.push("/heroes/list");
       this.$message({
         type: "success",
-        message: "保存成功",
+        message: "保存成功"
       });
     },
     async fetch() {
@@ -188,14 +199,19 @@ export default {
       const res = await this.$http.get(`rest/items`);
       this.items = res.data;
     },
+    async fetchHeroes() {
+      const res = await this.$http.get(`rest/heroes`);
+      this.heroes = res.data;
+    }
   },
   created() {
     this.fetchCategories();
     this.fetchItems();
+    this.fetchHeroes();
     if (this.id) {
       this.fetch();
     }
-  },
+  }
 };
 </script>
 
@@ -220,7 +236,7 @@ export default {
   text-align: center;
 }
 .avatar {
-  width: 5rem;
+  min-width: 5rem !important;
   height: 5rem;
   display: block;
 }

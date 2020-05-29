@@ -11,10 +11,7 @@
       <swiper-slide>
         <img class="w-100" src="../assets/img/swiper.jpeg" alt />
       </swiper-slide>
-      <div
-        class="swiper-pagination pagination-home text-right px-3 pb-1"
-        slot="pagination"
-      ></div>
+      <div class="swiper-pagination pagination-home text-right px-3 pb-1" slot="pagination"></div>
     </swiper>
 
     <!-- 导航 -->
@@ -29,7 +26,7 @@
       </div>
       <div v-else>
         <swiper :options="swiperOptions2">
-          <swiper-slide v-for="n in 10" :key="n" class=" text-center">
+          <swiper-slide v-for="n in 10" :key="n" class="text-center">
             <div class="nav-item-1 bd-r">
               <i class="sprite sprite-news"></i>
               <div class="py-2">
@@ -40,10 +37,7 @@
         </swiper>
       </div>
       <div class="bg-light py-2 fs-sm" @click="open = !open">
-        <i
-          class="sprite mr-1"
-          :class="open ? 'sprite-arrow-close' : 'sprite-arrow-open'"
-        ></i>
+        <i class="sprite mr-1" :class="open ? 'sprite-arrow-close' : 'sprite-arrow-open'"></i>
         <span>{{ open ? "收起" : "展开" }}</span>
       </div>
     </div>
@@ -52,38 +46,46 @@
 
     <m-list-card icon="Menu" title="新闻资讯" :categories="newsCats">
       <template v-slot:items="{ category }">
-        <div
+        <router-link
+          tag="div"
+          :to="`/articles/${item._id}`"
           class="py-2 fs-lg d-flex"
           v-for="(item, i) in category.newsList"
           :key="i"
         >
           <span class="text-grey">[{{ item.categoryName }}]</span>
           <span class="px-2 text-dark">|</span>
-          <span class="flex-1 text-dark text-ellipsis pr-2">{{
+          <span class="flex-1 text-dark text-ellipsis pr-2">
+            {{
             item.title
-          }}</span>
+            }}
+          </span>
           <span class="text-grey fs-sm">{{ item.createdAt | date }}</span>
-        </div>
+        </router-link>
       </template>
     </m-list-card>
+
+    <!-- 英雄列表 -->
     <m-list-card icon="icon-test" title="英雄列表" :categories="heroCats">
       <template v-slot:items="{ category }">
         <div class="d-flex flex-wrap" style="margin:0 -0.5rem">
-          <div
+          <router-link
+            tag="div"
+            :to="`/heroes/${item._id}`"
             class="p-2 text-center"
             style="width:20%"
             v-for="(item, i) in category.heroList"
             :key="i"
           >
-            <img :src="item.avatar" alt="" class="w-100" />
+            <img :src="item.avatar" alt class="w-100" />
             <div>
               <span>{{ item.name }}</span>
             </div>
-          </div>
+          </router-link>
         </div>
       </template>
     </m-list-card>
-    <p style="height:500px">11111</p>
+    <p class="fs-xl text-center" style="height:500px;font-weight:900">英雄请点击赵云，其他英雄数据还未添加</p>
   </div>
 </template>
 
@@ -94,22 +96,22 @@ export default {
     return {
       swiperOptions1: {
         pagination: {
-          el: ".pagination-home",
+          el: ".pagination-home"
         },
         loop: true,
         autoplay: {
           delay: 1500,
-          disableOnInteraction: false,
-        },
+          disableOnInteraction: false
+        }
       },
       swiperOptions2: {
         freeMode: true,
         freeModeMomentum: false,
-        slidesPerView: 4,
+        slidesPerView: 4
       },
       newsCats: [],
       heroCats: [],
-      open: false,
+      open: false
     };
   },
   methods: {
@@ -120,7 +122,7 @@ export default {
     async fetchHeroCats() {
       const res = await this.$http.get("heroes/list");
       this.heroCats = res.data;
-    },
+    }
   },
   created() {
     this.fetchNewsCats();
@@ -130,8 +132,8 @@ export default {
     //过滤器过滤日期
     date(val) {
       return dayjs(val).format("MM/DD");
-    },
-  },
+    }
+  }
 };
 </script>
 

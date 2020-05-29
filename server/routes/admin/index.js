@@ -26,12 +26,12 @@ module.exports = app => {
     })
   })
 
+
   router.get('/', async (req, res) => {
     const queryOptions = {}
     if (req.Model.modelName === "Category") {
       queryOptions.populate = "parent"
     }
-
     const items = await req.Model.find().setOptions(queryOptions).limit(100)
     res.send(items)
   })
@@ -65,6 +65,18 @@ module.exports = app => {
     //3.返回token
     const token = jwt.sign({ id: user._id, }, app.get('secret'))
     res.send({ token })
+  })
+
+  app.post('/admin/api/register', async (req, res) => {
+    const model = await AdminUser.create(req.body)
+    res.send(model)
+  })
+
+  app.get('/admin/api/user', async (req, res) => {
+    const token = String(req.headers.authorization || '').split(' ').pop()
+    const { id } = jwt.verify(token, req.app.get('secret'))
+    const user = await AdminUser.findById(id)
+    res.send(user)
   })
 
   app.use('/admin/api/rest/:resource', async (req, res, next) => {

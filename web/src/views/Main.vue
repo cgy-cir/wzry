@@ -17,8 +17,7 @@
             :class="{ active: active === i }"
             tag="span"
             to="/"
-            >{{ title }}</router-link
-          >
+          >{{ title }}</router-link>
         </div>
         <!-- 
         <div class="nav-item">
@@ -26,10 +25,10 @@
         </div>
         <div class="nav-item">
           <router-link class="nav-link" tag="span" to="/">赛事中心</router-link>
-        </div> -->
+        </div>-->
       </div>
     </div>
-    <router-view />
+    <router-view :key="$route.path" />
   </div>
 </template>
 
@@ -38,9 +37,9 @@ export default {
   data() {
     return {
       titles: ["首页", "攻略中心", "赛事中心"],
-      active: 0,
+      active: 0
     };
-  },
+  }
 };
 </script>
 

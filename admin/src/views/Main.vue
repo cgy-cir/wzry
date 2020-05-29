@@ -51,18 +51,16 @@
     </el-aside>
 
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
+      <el-header style="text-align: right; font-size: 12px;">
+        <span class="user">{{admin.username}}</span>
         <el-dropdown>
           <i class="el-icon-setting" style="margin-right: 15px"></i>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>查看</el-dropdown-item>
-            <el-dropdown-item>新增</el-dropdown-item>
-            <el-dropdown-item>删除</el-dropdown-item>
+            <el-dropdown-item @click.native="$router.push(`/admin_users/edit/${admin._id}`)">编辑</el-dropdown-item>
+            <el-dropdown-item @click.native="$router.push('/login')">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span>虎大将军</span>
       </el-header>
-
       <el-main>
         <router-view :key="$route.path" />
       </el-main>
@@ -80,8 +78,29 @@
 .el-aside {
   color: #333;
 }
+.user {
+  cursor: default;
+  margin-right: 7px;
+  font-size: 16px;
+}
 </style>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      admin: "",
+      token: ""
+    };
+  },
+  methods: {
+    async fetchAdmin() {
+      const res = await this.$http.get("user");
+      this.admin = res.data;
+    }
+  },
+  created() {
+    this.fetchAdmin();
+  }
+};
 </script>
