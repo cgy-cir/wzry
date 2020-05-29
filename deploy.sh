@@ -14,5 +14,5 @@ git commit -m 'deploy'
 
 # 部署到 https://<USERNAME>.github.io/<REPO>
 # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
-git push -f git@github.com:cgy-cir/vwzry.git master:gh-pages
+git push -f git@github.com:cgy-cir/wzry.git master:gh-pages
 cd -
