@@ -1,6 +1,10 @@
 # 简介
 wzry 是一个仿移动端王者荣耀官网和后台管理系统的项目，基于 vue-cli + vue-router + Element-Ui + node(Express) + mongodb(mongoose) 实现。管理后台录入的数据会通过 mongoose 传入数据库，移动端官网能够将数据动态地展示到页面上。
 
+## 预览地址
+[移动端官网](http://test.cgyyyyyy.icu/)
+[后台管理系统](http://test.cgyyyyyy.icu/admin/)
+
 ## 一、 环境准备
 1. 工具安装和环境搭建(nodejs,mongodb)
 
@@ -211,4 +215,4 @@ module.exports = () => {
 
 [MIT](https://github.com/cgy-cir/wzry/LICENSE)
 
-Copyright (c) 2020 Jake Zhang
+Copyright (c) 2020 cgy-cir
