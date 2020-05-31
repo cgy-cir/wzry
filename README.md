@@ -161,53 +161,6 @@ module.exports = () => {
 1. 英雄具体信息展示(数据后台传入)
 2. 点击英雄技能切换具体技能信息
 
-## 页面GIF和部分截图
-![](https://user-gold-cdn.xitu.io/2020/5/28/17259757827e697d?w=398&h=707&f=gif&s=4134118)
-
-
-
-![](https://user-gold-cdn.xitu.io/2020/5/28/1725985c1145159a?w=398&h=707&f=gif&s=4164999)
-
-![](https://user-gold-cdn.xitu.io/2020/5/28/172597ca420d3592?w=398&h=707&f=gif&s=3631507)
-
-![](https://user-gold-cdn.xitu.io/2020/5/28/17259810b481b8d6?w=398&h=707&f=gif&s=3335867)
-
-![](https://user-gold-cdn.xitu.io/2020/5/28/17259aa27b8376c2?w=1893&h=837&f=gif&s=4270188)
-
-
-
-
-
-![](https://user-gold-cdn.xitu.io/2020/5/28/17259b0ef42fdec0?w=1893&h=879&f=gif&s=2046522)
-
-#### 后台管理
-![](https://user-gold-cdn.xitu.io/2020/5/28/1725994d18ac2079?w=1910&h=899&f=png&s=92563)
-
-![](https://user-gold-cdn.xitu.io/2020/5/28/172599cf658718da?w=1920&h=1062&f=png&s=237768)
-
-
-![](https://user-gold-cdn.xitu.io/2020/5/28/17259b3459677903?w=1896&h=893&f=png&s=91931)
-
-
-![](https://user-gold-cdn.xitu.io/2020/5/28/17259b560dfa76db?w=1899&h=909&f=png&s=241999)
-
-![](https://user-gold-cdn.xitu.io/2020/5/28/17259b7436a2b11d?w=1902&h=903&f=png&s=387833)
-
-#### web端
-![](https://user-gold-cdn.xitu.io/2020/3/3/1709c8e652a2817a?w=429&h=762&f=png&s=253151)
-![](https://user-gold-cdn.xitu.io/2020/3/3/1709c8f34ae800f1?w=431&h=761&f=png&s=239362)
-![](https://user-gold-cdn.xitu.io/2020/3/4/170a121c536f5006?w=428&h=760&f=png&s=449801)
-![](https://user-gold-cdn.xitu.io/2020/3/3/1709c963bf587437?w=428&h=765&f=png&s=393922)
-![](https://user-gold-cdn.xitu.io/2020/3/3/1709c902d5e38520?w=426&h=755&f=png&s=313654)
-![](https://user-gold-cdn.xitu.io/2020/3/3/1709c91212479b4a?w=426&h=761&f=png&s=640268)
-![](https://user-gold-cdn.xitu.io/2020/3/3/1709c944e57597ac?w=430&h=766&f=png&s=270453)
-![](https://user-gold-cdn.xitu.io/2020/3/3/1709c93d5365a421?w=434&h=764&f=png&s=170273)
-![](https://user-gold-cdn.xitu.io/2020/3/3/1709c91f50055982?w=428&h=757&f=png&s=243510)
-![](https://user-gold-cdn.xitu.io/2020/3/3/1709c9291c3a2e81?w=426&h=757&f=png&s=533855)
-![](https://user-gold-cdn.xitu.io/2020/3/3/1709c96dfc101ee8?w=430&h=762&f=png&s=198204) 
-![](https://user-gold-cdn.xitu.io/2020/3/3/1709c982c58670c2?w=431&h=762&f=png&s=47140)
-
-
 ## 免责声明
 本项目为仿做项目,仅做练手和学习使用,非官方App,禁止用于商业目的,产生的一切侵权著作法律后果,与本作者无关。
 
