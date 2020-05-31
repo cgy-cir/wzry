@@ -1,20 +1,20 @@
 # 简介
-vue--node-mongodb-wzry是一个移动端的仿王者荣耀手机端官网和后台管理系统的全栈开源项目，基于 vue + node (Express + ElementUI) +mongodb实现。本项目使用了最新的Vue全家桶技术栈，后台数据通过node+mongodb搭建。
+wzry 是一个仿移动端王者荣耀官网和后台管理系统的项目，基于 vue-cli + vue-router + Element-Ui + node(Express) + mongodb(mongoose) 实现。管理后台录入的数据会通过 mongoose 传入数据库，移动端官网能够将数据动态地展示到页面上。
 
 ## 一、 环境准备
-1. 工具安装和环境搭建(nodejs,npm,mongodb)
+1. 工具安装和环境搭建(nodejs,mongodb)
 
 ## 二、 项目启动
 ### 1、star本仓库并克隆项目到本地
 
 ```
-git clone git@github.com:JakeZhangZJK/vue--node-mongodb-wzry.git
+git clone git@github.com:cgy-cir/wzry.git
 ```
 
 ### 2、进入项目目录
 
 ```
-cd vue-node-mongodb-wzry
+cd wzry
 ```
 
 ### 3、安装依赖
@@ -50,18 +50,17 @@ npm run build
 ## 三、 管理后台
 1. 基于Element UI的后台管理基础界面搭建
 #### 后台管理系统主要有以下功能：
+1. 登录注册功能
 1. 分类管理（无限级数）
 1. 装备管理
 1. 英雄管理
 1. 文章管理（其中编辑器使用的是富文本编辑器 (vue2-editor)）
-1. 视频攻略管理
 1. 广告管理
 1. 管理员账号管理 (bcrypt)
-1. 本地图片上传 (multer)和视频上传
-1. 列表分页功能及模糊查询
+1. 本地图片上传 (multer)
 1. 登录模块使用接口 (jwt,jsonwebtoken)进行服务端登录校验
-1. 客户端路由限制 (beforeEach, meta)
-1. 上传文件的登录校验 (el-upload, headers)
+1. 客户端路由限制 (beforeEach)
+
 
 **ps：所有增删改查均使用通用 CRUD 接口；通过中间件匹配前端传过来路由进行相应的增删改查**
 
@@ -137,22 +136,26 @@ module.exports = () => {
 
 1. 使用SASS (SCSS)进行base样式预定义（网站常用色彩、字体和边距定义 (colors, font,margin,padding)；
 1. 页面整体框架使用flex布局
-1. 首页顶部轮播图使用的是‘vue swiper’插件
+1. 页面轮播图使用的是‘vue swiper’插件
 1. 项目中一部分图标是扣取官方精灵图片 (sprite)，剩余部分使用字体图标 (阿里巴巴iconfont)
-1. 考虑到组件复用性，实现了通用列表卡片组件 (list-card, swiper)、英雄攻略列表组件（guide-list-card）和赛事中心列表（mt-card）组件，几乎可以用于除详情页外的所有布局，方便快捷
+1. 考虑到组件复用性，实现了通用列表卡片组件 (list-card, swiper)，方便快捷
 
 #### 总体实现了三大模块：
 **首页**
-1. 首页新闻资讯及详情页展示
-1. 首页英雄列表及详情页展示
-1. 首页图文攻略列表及详情页展示
-1. 首页精彩视频列表及视频播放
+1. 首页顶部轮播
+1. 首页导航轮播
+1. 首页新闻资讯
+1. 首页英雄列表
 
-**攻略中心**
-1. 攻略中心（英雄攻略、精品栏目、赛事精品、精彩视频和图文攻略5个小模块）及详情页展示和视频播放
 
-**赛事中心**
-1. 赛事列表及详情页图文展示
+**新闻资讯详情页**
+1. 新闻具体信息展示(数据后台传入)
+2. 底部切换附近新闻
+3. 使用 dayjs 匹配时间
+
+**英雄详情页**
+1. 英雄具体信息展示(数据后台传入)
+2. 点击英雄技能切换具体技能信息
 
 ## 页面GIF和部分截图
 ![](https://user-gold-cdn.xitu.io/2020/5/28/17259757827e697d?w=398&h=707&f=gif&s=4134118)
@@ -206,6 +209,6 @@ module.exports = () => {
 
 ## License
 
-[MIT](https://github.com/JakeZhangZJK/vue--node-mongodb-wzry/blob/master/LICENSE)
+[MIT](https://github.com/cgy-cir/wzry/LICENSE)
 
 Copyright (c) 2020 Jake Zhang
